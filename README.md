@@ -1,2 +1,2 @@
-# ssi-examples
-This repository showcases practical examples of SSI.
+# SSI Samples
+This repository showcases practical examples of the SSI-protocol built upon IPv8.
