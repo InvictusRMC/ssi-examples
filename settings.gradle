@@ -1,0 +1,9 @@
+rootProject.name = 'ssi-samples'
+
+include ':ipv8'
+project(':ipv8').projectDir = new File(settingsDir, 'kotlin-ipv8/ipv8')
+
+include 'ipv8-jvm'
+project(':ipv8-jvm').projectDir = new File(settingsDir, 'kotlin-ipv8/ipv8-jvm')
+
+include 'webapp'

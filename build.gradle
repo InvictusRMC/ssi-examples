@@ -1,0 +1,56 @@
+buildscript {
+    ext.kotlin_version = '1.4.21'
+    ext.coroutines_version = '1.4.2'
+    ext.dokka_version = "0.10.1"
+    ext.ktlint_version = '0.40.0'
+    ext.ktlint_gradle_version = '10.0.0'
+    ext.sqldelight_version = '1.2.1'
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:4.1.2'
+        classpath "org.jlleitschuh.gradle:ktlint-gradle:$ktlint_gradle_version"
+        classpath "org.jetbrains.dokka:dokka-gradle-plugin:$dokka_version"
+        classpath "com.squareup.sqldelight:gradle-plugin:$sqldelight_version"
+    }
+    repositories {
+        google()
+    }
+}
+
+plugins {
+    id 'java'
+    id 'org.jetbrains.kotlin.jvm' version '1.4.21'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven { url "https://dl.bintray.com/mattskala/maven" }
+        maven { url "https://dl.bintray.com/terl/lazysodium-maven" }
+        maven { url 'https://jitpack.io' }
+    }
+
+    // Temp fix for issue https://github.com/mockk/mockk/issues/281
+    configurations.all {
+        resolutionStrategy {
+            force("org.objenesis:objenesis:2.6")
+            force('com.google.inject:guice:4.2.1')
+            force('com.google.inject:guice-multibindings:4.2.1')
+        }
+    }
+
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+}
+
+test {
+    useJUnitPlatform()
+}
